@@ -1,6 +1,6 @@
-# Set-Git-User (pre-commit hook)
+# Autocorrect Git-User (pre-commit hook)
 
-A pre-commit hook to set the git user automatically based on a regex for the git remote url
+A pre-commit hook to set/correct the git user automatically based on a regex for the git remote url
 
 ## Installation
 
@@ -16,7 +16,7 @@ Using this script provides the following benefits:
 2. Easy management of multiple git user credentials per remote using the `git-users.json` file.
 
 
-example contents of git-users.json
+example contents of [git-users.json](https://github.com/derhollaender/set-git-user-for-remote/blob/main/gitusers.json.example)
 ```json
 {
     "work": {
@@ -58,6 +58,4 @@ With the configuration above, before each commit, the hook will ensure that the 
 - `john-doe-the-coder` and `john.coder75@yahoo.com` __IF__ the remote url of the repository matches the regex `(github\\.com)`
 - `john-bb` and `john.coder75@yahoo.com` __IF__ the remote url of the repository matches the regex `(github\\.com)`
 - `John Doe` and `john.doe@gmail.com` __IF__ none of the other regexes match
-
-For more information and examples, refer to the [git-users.json.example](https://github.com/derhollaender/set-git-user-for-remote/git-users.json.example) file in the GitHub repository.
 
