@@ -1,0 +1,39 @@
+#!/bin/bash
+# This Git hook script sets the user name and email for Git commits based on the remote URL.
+# It is designed to be used as a pre-commit hook to ensure that the correct user information is used for each commit.
+
+# Check if jq is installed
+if ! command -v jq &> /dev/null; then
+    echo "jq is not installed. It's needed for the pre-commit hook to work. Please install jq and try again."
+    exit 0
+fi
+
+
+# Declare the different type of accounts
+GITUSERS_FILE="$(dirname "$0")/git-users.json"
+accounts=$(cat "$GITUSERS_FILE")
+
+remote_url=$(git remote get-url origin)
+
+# Get current git config user.name and user.email
+current_username=$(git config user.name)
+current_email=$(git config user.email)
+
+
+# Set git config user.name and user.email based on remote_url_regex if they are incorrect
+for account in $(echo "$accounts" | jq -r 'keys[]'); do
+
+    username=$(echo "$accounts" | jq --arg acc "$account" -r '.[$acc].username')
+    email=$(echo "$accounts" | jq --arg acc "$account" -r '.[$acc].email')
+    remote_url_regex=$(echo "$accounts" | jq --arg acc "$account" -r '.[$acc].remote_url_regex')
+    if [[ $remote_url =~ $remote_url_regex ]]; then
+        if [[ $current_username != "$username" ]]; then
+            git config user.name "$username"
+        fi
+        if [[ $current_email != "$email" ]]; then
+            git config user.email "$email"
+        fi
+        echo "Updated git config for $account: $username (user.name), $email (user.email)"
+        break
+    fi
+done

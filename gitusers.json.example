@@ -1,0 +1,27 @@
+{
+    "work": {
+        "username": "John Doe @ Work",
+        "email": "john.doe@facebook.com",
+        "remote_url_regex": "(git.facebook.com|git.facebook.org|git.meta.com)"
+    },
+    "gitlab": {
+        "username": "John Doe",
+        "email": "john.doe@gmail.com",
+        "remote_url_regex": "gitlab\\.com"
+    },
+    "github": {
+        "username": "john-doe-the-coder",
+        "email": "john.coder75@yahoo.com",
+        "remote_url_regex": "github\\.com"
+    },
+    "bitbucket": {
+        "username": "john-bb",
+        "email": "john.coder75@yahoo.com",
+        "remote_url_regex": "github\\.com"
+    },
+    "default": {
+        "username": "John Doe",
+        "email": "john.doe@gmail.com",
+        "remote_url_regex": ""
+    }
+}
